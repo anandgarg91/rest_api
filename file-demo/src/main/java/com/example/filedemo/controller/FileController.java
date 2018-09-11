@@ -39,6 +39,14 @@ public class FileController {
                 file.getContentType(), file.getSize());
     }
 
+    @GetMapping("/getFile")
+    public void getFile(){
+		 fileStorageService.getFile();
+
+   
+   
+    }
+
     @PostMapping("/uploadMultipleFiles")
     public List<UploadFileResponse> uploadMultipleFiles(@RequestParam("files") MultipartFile[] files) {
         return Arrays.asList(files)
@@ -46,6 +54,7 @@ public class FileController {
                 .map(file -> uploadFile(file))
                 .collect(Collectors.toList());
     }
+
 
     @GetMapping("/downloadFile/{fileName:.+}")
     public ResponseEntity<Resource> downloadFile(@PathVariable String fileName, HttpServletRequest request) {

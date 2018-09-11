@@ -15,6 +15,9 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.util.stream.Stream;
+
+import java.net.URISyntaxException;
 
 @Service
 public class FileStorageService {
@@ -29,9 +32,21 @@ public class FileStorageService {
         try {
             Files.createDirectories(this.fileStorageLocation);
         } catch (Exception ex) {
-           // throw new FileStorageException("Could not create the directory where the uploaded files will be stored.", ex);
+            throw new FileStorageException("Could not create the directory where the uploaded files will be stored.", ex);
         }
     }
+
+
+  public void getFile(){
+	try {
+	ClassLoader classLoader = this.getClass().getClassLoader();
+	Path configFilePath = Paths.get(classLoader.getResource("files").toURI());
+	Files.walk(configFilePath).filter(Files::isRegularFile).forEach(System.out::println);			
+  }catch (Exception ex) {
+            throw new FileStorageException("Could not create the directory where the uploaded files will be stored.", ex);
+
+}
+}
 
     public String storeFile(MultipartFile file) {
         // Normalize file name
@@ -60,8 +75,8 @@ public class FileStorageService {
             if(resource.exists()) {
                 return resource;
             } else {
-                //throw new MyFileNotFoundException("File not found " + fileName);
-            	return resource;
+                throw new MyFileNotFoundException("File not found " + fileName);
+            	
             }
         } catch (MalformedURLException ex) {
            throw new MyFileNotFoundException("File not found " + fileName, ex);
