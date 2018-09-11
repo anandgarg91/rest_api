@@ -42,8 +42,6 @@ public class FileController {
     @GetMapping("/getFile")
     public void getFile(){
 		 fileStorageService.getFile();
-
-   
    
     }
 
