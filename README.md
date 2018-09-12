@@ -1,27 +1,30 @@
-# Upload/Download Rest API
+# Rest APIs
 
-# Dependencies
+## Dependencies
 
 * Spring(Boot Framework)
+	sudo apt-get install spring
 * Maven(Build)
+	sudo apt-get install maven
 * ngrok(tunneling to online IP)
+	sudo apt-get install ngrok-client
 
-# Build
+## Build
 
 * mvn spring-boot:run (Server is running at localhost port 8080)
 * ngrok http 8080 (serevr will run at localhost port 4040)
 
-# POST
+## POST
 
 * Upload API
- * http://localhost:8080/uploadFile (choose multipart form file in postman)
- * curl -F file=@ve_aisp.jpg http://localhost:8080/uploadFile
+* http://localhost:8080/uploadFile (choose multipart form file in postman)
+* curl -F file=@ve_aisp.jpg http://localhost:8080/uploadFile
 
-# GET
+## GET
 
 * Download API
- * http://localhost:8080/downloadFile/cypro.jpg (postman)
- * curl http://localhost:8080/downloadFile/cypro.jpg
+* http://localhost:8080/downloadFile/cypro.jpg (postman)
+* curl http://localhost:8080/downloadFile/cypro.jpg
 
-* Get API
- * curl http://localhost:8080/getFile
+* Trace API
+* curl http://localhost:8080/getFile

@@ -17,7 +17,7 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
-
+import java.nio.file.Path;
 @RestController
 public class FileController {
 
@@ -40,8 +40,8 @@ public class FileController {
     }
 
     @GetMapping("/getFile")
-    public void getFile(){
-		 fileStorageService.getFile();
+    public List<Path> getFile(){
+		 return fileStorageService.getFile();
    
     }
 

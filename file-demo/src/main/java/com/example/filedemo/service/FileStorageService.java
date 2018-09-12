@@ -16,9 +16,10 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.util.stream.Stream;
-
+import java.util.List;
 import java.net.URISyntaxException;
 
+import java.util.stream.Collectors;
 @Service
 public class FileStorageService {
 
@@ -37,17 +38,18 @@ public class FileStorageService {
     }
 
 
-  public void getFile(){
+  public List<Path> getFile() {
 	try {
 	ClassLoader classLoader = this.getClass().getClassLoader();
 	Path configFilePath = Paths.get(classLoader.getResource("files").toURI());
-	Files.walk(configFilePath).filter(Files::isRegularFile).forEach(System.out::println);			
+	List<Path> trackfile = Files.walk(configFilePath).filter(Files::isRegularFile).map(Path::getFileName).collect(Collectors.toList());
+	return trackfile;			
   }catch (Exception ex) {
             throw new FileStorageException("Could not create the directory where the uploaded files will be stored.", ex);
 
 }
 }
-
+//.forEach(System.out::println)
     public String storeFile(MultipartFile file) {
         // Normalize file name
         String fileName = StringUtils.cleanPath(file.getOriginalFilename());
