@@ -28,3 +28,5 @@
 
 * Trace API
 * curl http://localhost:8080/getFile
+
+* Soon the project will have the data analytic apis
